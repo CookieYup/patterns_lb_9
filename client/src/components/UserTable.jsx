@@ -1,0 +1,4 @@
+function UserTable({ users, onWarning, onChangeRole, mode = 'view' }) {
+  return <div className="table-wrapper"><table><thead><tr><th>Ім’я</th><th>Email</th><th>Роль</th><th>Статус</th><th>Попередження</th>{mode !== 'view' && <th>Дія</th>}</tr></thead><tbody>{users.map((user) => <tr key={user.id}><td>{user.name}</td><td>{user.email}</td><td><span className="role">{user.role}</span></td><td>{user.status}</td><td>{user.warnings}</td>{mode === 'admin' && <td><button onClick={() => onWarning(user.id)}>Додати попередження</button></td>}{mode === 'super-admin' && <td><select value={user.role} onChange={(event) => onChangeRole(user.id, event.target.value)}><option value="USER">USER</option><option value="ADMIN">ADMIN</option><option value="SUPER_ADMIN">SUPER_ADMIN</option></select></td>}</tr>)}</tbody></table></div>;
+}
+export default UserTable;
